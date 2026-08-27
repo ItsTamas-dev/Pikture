@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Pikture</title>
+    <link rel="stylesheet" href="fontawesome/css/all.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/all.css" />
+  </head>
+  <body>
+    <div class="bg">
+      <img src="img/bg.jpg" class="bg-image" />
+    </div>
+    <div class="sidebar">
+      <div class="logo_content">
+        <div class="logo">
+          <i class="fa fa-image"></i>
+          <div class="logo_name">Pikture</div>
+        </div>
+        <button>
+          <i class="fa fa-exchange-alt" id="btn"></i>
+        </button>
+      </div>
+      <ul class="nav_list">
+        <li>
+          <a href="main.html">
+            <i class="fas fa-address-book"></i>
+            <span class="links_name">Saját Képek</span>
+          </a>
+          <span class="tooltip">Saját</span>
+        </li>
+        <li>
+          <a href="allimg.html">
+            <i class="fas fa-image"></i>
+            <span class="links_name">Képek</span>
+          </a>
+          <span class="tooltip">Képek</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-pen-square"></i>
+            <span class="links_name">Pályázatok</span>
+          </a>
+          <span class="tooltip">Pályázat</span>
+        </li>
+        <li>
+          <a href="admin.html">
+            <i class="fas fa-user"></i>
+            <span class="links_name">Admin</span>
+          </a>
+          <span class="tooltip">Admin</span>
+        </li>
+      </ul>
+      <div class="profile_content">
+        <div class="profile">
+          <div class="profile_details">
+            <img src="img/bg.jpg" alt="" id="prof" />
+
+            <div class="name_job">
+              <div class="name">Felhasználónév</div>
+              <div class="job">szerep</div>
+            </div>
+          </div>
+          <a href="index.html">
+            <i class="fas fa-sign-out-alt" id="log_out"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="home_content">
+      <div class="user">
+        <h1>Admin</h1>
+        <div class="top">
+          <div class="data">
+            <div class="right">
+            <form action="#">
+              <h2>Felhasználók törlése</h2>
+
+              <label for="felhasznalo">Válasszon egy felhasználót.</label>
+              <select name="felhasznalo">
+                <option value="0"></option>
+                <option value="1">Tamas</option>
+                <option value="2">Gergo</option>
+                <option value="3">Martin</option>
+                <option value="4">Balazs</option>
+              </select>
+              <input type="submit" class="sub" value="Törlés" />
+            </form>
+            </div>
+
+            <div class="right">
+              <form action="#">
+                <h2>Kategóriák</h2>
+                <label for="kategoria_F">Kategória felvétel</label>
+                <input type="text" name="kategoria"/>
+                <label for="kategoria_T">Kategória törlés</label>
+
+                <select name="kategoria_T">
+                  <option value="0"></option>
+                  <option value="1">Kategória 1</option>
+                  <option value="2">Kategória 2</option>
+                  <option value="3">Kategória 3</option>
+                  <option value="4">Kategória 4</option>
+                </select>
+
+                <input type="submit" class="sub" value="Felvétel" />
+                <input type="submit" class="sub" value="Törlés" />
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div>
+            <form action="#">
+                <h2>Lekérdezések</h2>
+                <label for="kategoria_K">Hány kép van a kategóriában?</label>
+                <select name="kategoria_K">
+                  <option value="0"></option>
+                  <option value="1">Kategória 1</option>
+                  <option value="2">Kategória 2</option>
+                  <option value="3">Kategória 3</option>
+                  <option value="4">Kategória 4</option>
+                </select>
+                <input type="submit" class="sub" value="Lekérés"/>
+                <label>Ki töltötte fel a legtöbb képet?</label>
+                <label>En</label>
+            </form>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

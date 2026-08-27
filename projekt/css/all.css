@@ -1,0 +1,420 @@
+:root {
+    --color1: #ffffff;
+    --color2: #000000;
+    --color3: #EDE8F5;
+    --color4: #8697C4;
+    --color5: #7091E6;
+    --color6: #ADBBDA;
+    --color7: #3D52A0;
+}
+@font-face {
+    font-family: Poppins;
+    src: url(../font/Poppins-Light.ttf);
+}
+html::-webkit-scrollbar{
+    /*width: 0px; */
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+.all_img .imgs, .user .imgs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.all_img h1, .user h1, .imgpage h1, .com h1, .competition h1{
+    text-align: center;
+    color: var(--color3);
+    margin-bottom: 1em;
+    text-shadow: 1px 1px 2px black;
+}
+.all_img .imgs .img, .user .imgs .img{
+    flex-basis: 200;
+    margin: 1em;
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+}
+.all_img .imgs .img .pont{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color: var(--color5);
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    padding-top: 8px;
+    border-radius: 50%;
+    color: var(--color3);
+    z-index: 100;
+}
+.all_img, .user, .imgpage{
+    padding: 2em;
+    height: 100%;
+    width: 100%;
+    color: var(--color5);
+    overflow-y: scroll;
+}
+.img img{
+    padding: 0;
+    margin: 0;
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform .5s ease;
+}
+.all_img .img img:hover, .user .imgs .img img:hover{
+    transform: scale(1.2);
+}
+.popup-image{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.9);
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    display: none;
+}
+.popup-image span{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 60px;
+    font-weight: bolder;
+    color: var(--color1);
+    cursor: pointer;
+    z-index: 100;
+}
+.popup-image img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 750px;
+    object-fit: cover;
+}
+.all_img form{
+    position: relative;
+}
+.all_img form label{
+    font-size: 1.5em;
+    position: absolute;
+    left: 8px;
+}
+.all_img form .in{
+    width: 100%;
+    font-size: 1.2em;
+    border-radius: 1em;
+    padding-left: 3em;
+}
+/*User page*/
+.user .top, .imgpage .top, .com .top, .competition .top{
+    display: flex;
+    width: 100%;
+}
+.user .top .img, .imgpage .top .img{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.user .top .img img, .imgpage .top .img img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.imgpage .top .img img{
+    border-radius: 15px;
+}
+.user .top .data, .imgpage .top .data{
+    width: 75%;
+    background-color: rgba(61,82,160,0.5);
+    border-radius: 15px;
+    padding: 1em;
+    color: var(--color3);
+    display: flex;
+    min-height: 300px;
+}
+.com .top, .competition .top{
+    width: 100%;
+    background-color: rgba(61,82,160,0.5);
+    border-radius: 15px;
+    padding: 1em;
+    color: var(--color3);
+    display: flex;
+    min-height: 300px;
+}
+.user .top .data .left, .user .top .data .right, .imgpage .top .data .right, .imgpage .top .data .left{
+    width: 50%;
+}
+.user .top .data .left label, .imgpage .top .data .left label{
+    display: grid;
+    margin-top: 1em;
+}
+.user h2, .imgpage h2{
+    margin-bottom: 2em;
+    border-bottom: 1px solid rgba(61,82,160, 0.8);
+}
+.user .top .data .right input{
+    border: none;
+    font-size: 1em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    padding:0.5em 1em;
+}
+.user .top .data .right .sub{
+    margin-left: 1em;
+    background-color: var(--color5);
+    color: var(--color3);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    width: 150px;
+    letter-spacing: 1px;
+}
+.user .top .data .right .sub:hover{
+    letter-spacing: 3px;
+}
+.container {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 100;
+    border-radius: 50%;
+  }
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    border-radius: 50%;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: var(--color3);
+    border-radius: 50%;
+}
+.container:hover input ~ .checkmark {
+    background-color: var(--color3);
+}
+.container input:checked ~ .checkmark {
+    background-color: var(--color5);
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--color3);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.saj{
+    margin-top: 2em;
+}
+.tor{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.tor input, .udel{
+    background-color: var(--color5);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    color: var(--color3);
+    letter-spacing: 1px;
+    width: 250px;
+    margin-bottom: 1em;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.tor button:hover, .udel:hover{
+    letter-spacing: 3px;
+}
+.imgpage .new{
+    width: 100%;
+    background-color:rgba(61,82,160, 0.5);
+    color: var(--color3);
+    padding: 1em;
+    border-radius: 15px 15px 0 0;
+}
+.new textarea{
+    width: 100%;
+}
+.new input, .right .submit{
+    background-color: var(--color5);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    color: var(--color3);
+    letter-spacing: 1px;
+    width: 250px;
+    margin-bottom: 1em;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.new input:hover, .right .submit:hover{
+    letter-spacing: 3px;
+}
+.imgpage .all{
+    background-color: rgba(61,82,160, 0.5);
+    border-radius: 0px 0px 15px 15px;
+    padding: 1em;
+    color: var(--color3);
+}
+.imgpage .com{
+    border-bottom: 1px solid rgba(61,82,160, 0.8);
+    padding: 1em;
+}
+.keres{
+    position: absolute;
+    right: 0;
+    width: 60px;
+    font-size: 1.2em;
+    border-radius: 1em;
+}
+.admin, .comp{
+    width: 100%;
+    background-color: rgba(61,82,160, 0.5);
+    border-radius: 15px;
+    padding: 1em;
+}
+.admin .cont, .comp .cont{
+    display: flex;
+    width: 100%;
+}
+.admin .cont .small{
+    width: 25%;
+    color: var(--color3);
+}
+.admin .cont .big{
+    width: 50%;
+    color: var(--color3);
+}
+.admin h3{
+    color: var(--color3);
+    border-bottom: 1px solid rgba(61,82,160, 0.8);
+}
+.admin .cats{
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.cats a{
+    color: var(--color6);
+}
+.admin .big select{
+    width: 250px;
+    margin-bottom: 1em;
+}
+.comp h2{
+    color: var(--color3);
+}
+.newcom label{
+    color: var(--color3);
+}
+.newcom, .coms{
+    width:50%;
+}
+.newcom input{
+    width: 100%;
+}
+.comp .cont{
+    display: flex;
+    justify-content: center;
+}
+.comp .cont h2{
+    margin-top: 2em;
+}
+.com{
+    color: var(--color3);
+    border-bottom: 1px solid rgba(61,82,160, 0.8);
+    padding: 1em;
+}
+.com a{
+    background-color: var(--color7);
+    color: var(--color3);
+    padding: 0em 1em ;
+    float: right;
+}
+.newcom .error{
+    color: var(--color3);
+}
+.competition .top{
+    display: flex;
+    justify-content: center;
+}
+.competition .bottom{
+    display: flex;
+    margin-top: 2em;
+}
+.competition .bottom .bekuldott{
+    width: 50%;
+    text-align: center;
+}
+.home_content{
+    overflow-y: scroll;
+}
+.bekuldott .imgs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.bekuldott .imgs .img, .user .imgs .img{
+    flex-basis: 200;
+    margin: 1em;
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+}
+.competition h3{
+    color: var(--color1);
+}
+.bekuldott .imgs .img input{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.bekuldott input[type=submit]{
+    background-color: transparent;
+    border: none;
+    color: var(--color1);
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.9);
+}

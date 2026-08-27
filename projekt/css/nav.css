@@ -1,0 +1,234 @@
+:root {
+    --color1: #ffffff;
+    --color2: #000000;
+    --color3: #EDE8F5;
+    --color4: #8697C4;
+    --color5: #7091E6;
+    --color6: #ADBBDA;
+    --color7: #3D52A0;
+}
+@font-face {
+    font-family: Poppins;
+    src: url(../font/Poppins-Light.ttf);
+}
+html::-webkit-scrollbar{
+    /*width: 0px; */
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color2);
+    overflow: hidden;
+}
+.bg{
+    filter: blur(1px);
+    -webkit-filter: blur(10px);
+    z-index: 0;
+    position: absolute;
+    max-height: 100vh;
+}
+.bg-image {
+    overflow: hidden;
+    height: 100%;
+    object-fit: cover;
+  }
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 78px;
+    background-color: var(--color5);
+    padding: 6px 14px;
+    transition: all 0.1s ease;
+    z-index: 100;
+}
+.sidebar .logo_content .logo{
+    color: var(--color3);
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+.sidebar.active .logo_content .logo{
+    opacity: 1;
+    pointer-events: auto;
+}
+.logo_content .logo i{
+    font-size: 28px;
+    margin-right: 5px;
+}
+.logo_content .logo .logo_name{
+    font-size: 20px;
+    font-weight: 400;
+}
+.sidebar button{
+    border: none;
+    position: absolute;
+    background-color: var(--color5);
+    color: var(--color3);
+    left: 50%;
+    top: 6px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: 0.5s ease;
+    border-radius: 12px;
+}
+.sidebar.active button{
+    left: 80%;
+}
+.sidebar button:hover{
+    color: var(--color4);
+    background-color: var(--color3);
+}
+.sidebar ul{
+    margin-top: 20px;
+}
+.sidebar ul li{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+}
+.sidebar ul li a{
+    color: var(--color3);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+.sidebar ul li a:hover{
+    color: var(--color4);
+    background-color: var(--color3);
+}
+.sidebar ul li i{
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+.sidebar .profile_content{
+    position: absolute;
+    color: var(--color3);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.sidebar .profile_content .profile{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background-color: var(--color5);
+    transition: all 0.5s ease;
+    border-top: 1px solid var(--color6);
+}
+.profile_content .profile .profile_details{
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: all 0.5s ease;
+}
+.profile .profile_details img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.profile .profile_details .name_job{
+    margin-left: 10px;
+}
+.profile .profile_details .name{
+    font-size: 15px;
+    font-weight: 400;
+}
+.profile .profile_details .job{
+    font-size: 12px;
+}
+.profile #log_out{
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--color3);
+}
+.profile #log_out:hover{
+    color: var(--color4);
+    background-color: var(--color3);
+}
+.sidebar.active .profile #log_out{
+    left: 88%;
+}
+.sidebar ul li .tooltip{
+    position: absolute;
+    height: 35px;
+    left: 122px;
+    top: 0;
+    transform: translateY(-50%, -50%);
+    border-radius: 6px;
+    line-height: 35px;
+    width: 122px;
+    text-align: center;
+    background-color: var(--color5);
+    color: var(--color3);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+.sidebar.active ul li .tooltip{
+    display: none;
+}
+.sidebar ul li:hover .tooltip{
+    top: 50%;
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+.sidebar.active{
+    width: 240px;
+}
+.sidebar .links_name{
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar.active .links_name, .sidebar.active .profile .profile_details{
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.2s ease;
+}
+.home_content{
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 100px);
+    left: 100px;
+    z-index: 3;
+}

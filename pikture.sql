@@ -1,0 +1,751 @@
+--------------------------------------------------------
+--  File created - h�tf�-m�jus-06-2024
+--------------------------------------------------------
+DROP TABLE "APPLICANTS" cascade constraints;
+DROP TABLE "COMMENTS" cascade constraints;
+DROP TABLE "COMPETITION" cascade constraints;
+DROP TABLE "COUNTRY" cascade constraints;
+DROP TABLE "COUNTY" cascade constraints;
+DROP TABLE "LOCATIONS" cascade constraints;
+DROP TABLE "PICTURES" cascade constraints;
+DROP TABLE "RATING" cascade constraints;
+DROP TABLE "SETTLEMENT" cascade constraints;
+DROP TABLE "TAGS" cascade constraints;
+DROP TABLE "UPLOAD" cascade constraints;
+DROP TABLE "USERS" cascade constraints;
+DROP FUNCTION "LOGIN";
+DROP FUNCTION "NEWPIC";
+DROP FUNCTION "NEWRATING";
+--------------------------------------------------------
+--  DDL for Table APPLICANTS
+--------------------------------------------------------
+
+  CREATE TABLE "APPLICANTS"
+   (	"USERID" NUMBER,
+	"PICTUREID" NUMBER,
+	"COMPETITIONID" NUMBER
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table COMMENTS
+--------------------------------------------------------
+
+  CREATE TABLE "COMMENTS"
+   (	"COMMENTID" NUMBER,
+	"PICTUREID" NUMBER,
+	"USERID" NUMBER,
+	"COMM" VARCHAR2(255 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table COMPETITION
+--------------------------------------------------------
+
+  CREATE TABLE "COMPETITION"
+   (	"COMPETITIONID" NUMBER,
+	"TITLE" VARCHAR2(100 BYTE),
+	"DESCRIPTION" VARCHAR2(255 BYTE),
+	"PRIZE" NUMBER
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table COUNTRY
+--------------------------------------------------------
+
+  CREATE TABLE "COUNTRY"
+   (	"ID" NUMBER,
+	"NAME" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table COUNTY
+--------------------------------------------------------
+
+  CREATE TABLE "COUNTY"
+   (	"COUNTRYID" NUMBER,
+	"ID" NUMBER,
+	"NAME" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table LOCATIONS
+--------------------------------------------------------
+
+  CREATE TABLE "LOCATIONS"
+   (	"LOCATIONID" NUMBER,
+	"COUNTRYID" NUMBER,
+	"COUNTYID" NUMBER,
+	"SETTLEMENTID" NUMBER
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table PICTURES
+--------------------------------------------------------
+
+  CREATE TABLE "PICTURES"
+   (	"PICTUREID" NUMBER,
+	"USERID" NUMBER,
+	"TAGS" VARCHAR2(100 BYTE),
+	"PICTUREPATH" VARCHAR2(255 BYTE),
+	"LOCATION" NUMBER
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table RATING
+--------------------------------------------------------
+
+  CREATE TABLE "RATING"
+   (	"PICTUREID" NUMBER,
+	"USERID" NUMBER,
+	"STAR" NUMBER
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table SETTLEMENT
+--------------------------------------------------------
+
+  CREATE TABLE "SETTLEMENT"
+   (	"COUNTYID" NUMBER,
+	"ID" NUMBER,
+	"NAME" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table TAGS
+--------------------------------------------------------
+
+  CREATE TABLE "TAGS"
+   (	"TAGID" NUMBER,
+	"TAG" VARCHAR2(50 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table UPLOAD
+--------------------------------------------------------
+
+  CREATE TABLE "UPLOAD"
+   (	"USERID" NUMBER,
+	"DATUM" DATE,
+	"MIT" VARCHAR2(255 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table USERS
+--------------------------------------------------------
+
+  CREATE TABLE "USERS"
+   (	"USERID" NUMBER,
+	"USERNAME" VARCHAR2(50 BYTE),
+	"PASSWORD" VARCHAR2(50 BYTE),
+	"EMAIL" VARCHAR2(100 BYTE),
+	"ROLE" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into APPLICANTS
+SET DEFINE OFF;
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','4','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','2','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','2','3');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','3','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('12','6','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('12','7','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','4','3');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','3','5');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('10','5','6');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('12','8','3');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('12','7','3');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('12','6','5');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('11','11','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('11','10','1');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('11','9','3');
+Insert into APPLICANTS (USERID,PICTUREID,COMPETITIONID) values ('11','10','3');
+REM INSERTING into COMMENTS
+SET DEFINE OFF;
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('4','4','10','HMMMMMMM SZEGED');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('1','2','10','Nagyon jo!! :D');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('2','2','10','Meg mindig jo!!');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('3','3','10','Nagyon szep Bekescsaba!!');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('5','4','12','Nagyon szep! :)');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('6','6','10','Nagyon szep a Tisza!');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('7','7','10','Egyetem :)');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('8','8','10','Szeghalom? Az hol van?');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('9','5','10','Nagy jo lett');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('10','9','10','Kar hogy volt ido mikor nagyon meleg volt benn.');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('11','10','10','Nagyon szep kor alaku epulet!');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('12','11','10','Jo nagy lyuk!');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('13','12','10','Az a kapu tan a mennybe vezet, olyan fenyes');
+Insert into COMMENTS (COMMENTID,PICTUREID,USERID,COMM) values ('14','13','10','Hmmm a whishes Eiffel torony');
+REM INSERTING into COMPETITION
+SET DEFINE OFF;
+Insert into COMPETITION (COMPETITIONID,TITLE,DESCRIPTION,PRIZE) values ('1','Landscape Photography Contest','Showcase your best landscape photos!','10000');
+Insert into COMPETITION (COMPETITIONID,TITLE,DESCRIPTION,PRIZE) values ('2','Portrait Photography Competition','Submit your most captivating portraits!','1000000');
+Insert into COMPETITION (COMPETITIONID,TITLE,DESCRIPTION,PRIZE) values ('3','Architecture Photo Challenge','Capture stunning architecture shots!','200000');
+Insert into COMPETITION (COMPETITIONID,TITLE,DESCRIPTION,PRIZE) values ('4','Nature Photography Contest','Share your breathtaking nature photos!','140000');
+Insert into COMPETITION (COMPETITIONID,TITLE,DESCRIPTION,PRIZE) values ('5','Wildlife Photography Competition','Present your best wildlife shots!','1200000');
+Insert into COMPETITION (COMPETITIONID,TITLE,DESCRIPTION,PRIZE) values ('6','asd','asd','12');
+REM INSERTING into COUNTRY
+SET DEFINE OFF;
+Insert into COUNTRY (ID,NAME) values ('2','franciaorszag');
+Insert into COUNTRY (ID,NAME) values ('6','japan');
+Insert into COUNTRY (ID,NAME) values ('1','magyarorszag');
+Insert into COUNTRY (ID,NAME) values ('5','nemetorszag');
+Insert into COUNTRY (ID,NAME) values ('3','olaszorszag');
+Insert into COUNTRY (ID,NAME) values ('4','usa');
+REM INSERTING into COUNTY
+SET DEFINE OFF;
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('4','6','arizona');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('1','2','bekes-megye');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('5','7','brandenburg');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('1','3','csongrad-csanad-megye');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('2','4','ile-de-france');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('6','8','kanto');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('3','5','lazio');
+Insert into COUNTY (COUNTRYID,ID,NAME) values ('1','1','pest-megye');
+REM INSERTING into LOCATIONS
+SET DEFINE OFF;
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('2','1','2','2');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('3','1','3','3');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('4','1','2','4');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('5','2','4','5');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('6','3','5','6');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('7','4','6','7');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('8','5','7','8');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('9','6','8','9');
+Insert into LOCATIONS (LOCATIONID,COUNTRYID,COUNTYID,SETTLEMENTID) values ('1','1','1','1');
+REM INSERTING into PICTURES
+SET DEFINE OFF;
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('2','10','orszaghaz','img/1714832853c.jpg','1');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('6','12','tisza','img/1714994435DSC00347.jpg','3');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('7','12','tik','img/1714994480biciklik_diakok_vagott2_.jpg','3');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('8','12','konyvtar','img/1714994548131_1.jpg','4');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('4','10','dom','img/1714860268dom.jpg','3');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('5','10','dom','img/1714920558Dom2.jpg','3');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('9','11','notre dame','img/1714994928NotreDameI.jpg','5');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('10','11','colosseum','img/171499502299.jpg','6');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('11','11','grand canyon','img/1714995141USA-Grand-Canyon-header.jpg','7');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('12','13','brandenburgi-kapu','img/1714995378brandenburger_tor.jpg','8');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('13','14','tokyi-torony','img/1714995540louie-martinez-IocJwyqRv3M-unsplash.jpg','9');
+Insert into PICTURES (PICTUREID,USERID,TAGS,PICTUREPATH,LOCATION) values ('3','10','varoshaza','img/1714847425d.jpg','2');
+REM INSERTING into RATING
+SET DEFINE OFF;
+Insert into RATING (PICTUREID,USERID,STAR) values ('2','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('13','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('4','10','3');
+Insert into RATING (PICTUREID,USERID,STAR) values ('5','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('6','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('7','10','3');
+Insert into RATING (PICTUREID,USERID,STAR) values ('8','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('9','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('10','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('11','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('12','10','4');
+Insert into RATING (PICTUREID,USERID,STAR) values ('3','10','5');
+REM INSERTING into SETTLEMENT
+SET DEFINE OFF;
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('2','2','bekescsaba');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('1','1','budapest');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('3','3','szeged');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('2','4','szeghalom');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('4','5','parizs');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('5','6','roma');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('6','7','arizona');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('7','8','berlin');
+Insert into SETTLEMENT (COUNTYID,ID,NAME) values ('8','9','tokyo');
+REM INSERTING into TAGS
+SET DEFINE OFF;
+Insert into TAGS (TAGID,TAG) values ('6','asd');
+Insert into TAGS (TAGID,TAG) values ('1','nature');
+Insert into TAGS (TAGID,TAG) values ('3','city');
+Insert into TAGS (TAGID,TAG) values ('4','urban');
+Insert into TAGS (TAGID,TAG) values ('5','portrait');
+REM INSERTING into UPLOAD
+SET DEFINE OFF;
+Insert into UPLOAD (USERID,DATUM,MIT) values ('9',to_date('24-M�J.  -05','RR-MON-DD'),'K�p �rt�kel�s: 2');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('12',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 6');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('12',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 7');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('12',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 8');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('11',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 9');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -05','RR-MON-DD'),'K�p felt�lt�s: 5');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -05','RR-MON-DD'),'K�p �rt�kel�s: 5');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('11',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 10');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('11',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 11');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('13',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 12');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('14',to_date('24-M�J.  -06','RR-MON-DD'),'K�p felt�lt�s: 13');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 13');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 6');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 7');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 8');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 9');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 10');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 11');
+Insert into UPLOAD (USERID,DATUM,MIT) values ('10',to_date('24-M�J.  -06','RR-MON-DD'),'K�p �rt�kel�s: 12');
+REM INSERTING into USERS
+SET DEFINE OFF;
+Insert into USERS (USERID,USERNAME,PASSWORD,EMAIL,ROLE) values ('11','Vicc Elek','32250170a0dca92d53ec9624f336ca24','elek@gmail.com','USER');
+Insert into USERS (USERID,USERNAME,PASSWORD,EMAIL,ROLE) values ('12','Minden Aron','32250170a0dca92d53ec9624f336ca24','aron@gmail.com','USER');
+Insert into USERS (USERID,USERNAME,PASSWORD,EMAIL,ROLE) values ('13','Dani','32250170a0dca92d53ec9624f336ca24','dani@gmail.com','USER');
+Insert into USERS (USERID,USERNAME,PASSWORD,EMAIL,ROLE) values ('14','Martin','32250170a0dca92d53ec9624f336ca24','martin@gmail.com','USER');
+Insert into USERS (USERID,USERNAME,PASSWORD,EMAIL,ROLE) values ('10','Kovacs Tamas','d1f4111973cecc453bcd17f741d2162e','tomi2001.tst@gmail.com','ADMIN');
+--------------------------------------------------------
+--  DDL for Trigger COMMENT_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "COMMENT_AUTO_INCREMENT"
+BEFORE INSERT ON COMMENTS
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(COMMENTID)+1) INTO incremented_id FROM COMMENTS;
+    :NEW.COMMENTID := incremented_id;
+END;
+/
+ALTER TRIGGER "COMMENT_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger COMPETTION_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "COMPETTION_AUTO_INCREMENT"
+BEFORE INSERT ON COMPETITION
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(COMPETITIONID)+1) INTO incremented_id FROM COMPETITION;
+    :NEW.COMPETITIONID := incremented_id;
+END;
+/
+ALTER TRIGGER "COMPETTION_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger COUNTRY_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "COUNTRY_AUTO_INCREMENT"
+BEFORE INSERT ON COUNTRY
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(ID)+1) INTO incremented_id FROM COUNTRY;
+    :NEW.ID := incremented_id;
+END;
+/
+ALTER TRIGGER "COUNTRY_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger COUNTY_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "COUNTY_AUTO_INCREMENT"
+BEFORE INSERT ON COUNTY
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(ID)+1) INTO incremented_id FROM COUNTY;
+    :NEW.ID := incremented_id;
+END;
+/
+ALTER TRIGGER "COUNTY_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger LOCATION_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "LOCATION_AUTO_INCREMENT"
+BEFORE INSERT ON LOCATIONS
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(LOCATIONID)+1) INTO incremented_id FROM LOCATIONS;
+    :NEW.LOCATIONID := incremented_id;
+END;
+/
+ALTER TRIGGER "LOCATION_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger NAPLOUPLOAD
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "NAPLOUPLOAD"
+AFTER INSERT
+ON PICTURES
+FOR EACH ROW
+BEGIN
+    INSERT INTO UPLOAD VALUES (:NEW.USERID, SYSDATE, 'K�p felt�lt�s: '|| :NEW.PICTUREID);
+END;
+/
+ALTER TRIGGER "NAPLOUPLOAD" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger NAPLOUPLOADRAT
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "NAPLOUPLOADRAT"
+AFTER INSERT
+ON RATING
+FOR EACH ROW
+BEGIN
+    INSERT INTO UPLOAD VALUES (:NEW.USERID, SYSDATE, 'K�p �rt�kel�s: '|| :NEW.PICTUREID);
+END;
+/
+ALTER TRIGGER "NAPLOUPLOADRAT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PICTURE_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "PICTURE_AUTO_INCREMENT"
+BEFORE INSERT ON PICTURES
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(PICTUREID)+1) INTO incremented_id FROM PICTURES;
+    :NEW.PICTUREID := incremented_id;
+END;
+
+/
+ALTER TRIGGER "PICTURE_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger SETTLEMENT_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "SETTLEMENT_AUTO_INCREMENT"
+BEFORE INSERT ON SETTLEMENT
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(ID)+1) INTO incremented_id FROM SETTLEMENT;
+    :NEW.ID := incremented_id;
+END;
+
+/
+ALTER TRIGGER "SETTLEMENT_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TAG_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "TAG_AUTO_INCREMENT"
+BEFORE INSERT ON TAGS
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(TAGID)+1) INTO incremented_id FROM TAGS;
+    :NEW.TAGID := incremented_id;
+END;
+
+/
+ALTER TRIGGER "TAG_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger USER_AUTO_INCREMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "USER_AUTO_INCREMENT"
+BEFORE INSERT ON USERS
+FOR EACH ROW
+DECLARE
+    incremented_id NUMBER;
+BEGIN
+    SELECT (MAX(USERID)+1) INTO incremented_id FROM USERS;
+    :NEW.USERID := incremented_id;
+END;
+/
+ALTER TRIGGER "USER_AUTO_INCREMENT" ENABLE;
+--------------------------------------------------------
+--  DDL for Function LOGIN
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE FUNCTION "LOGIN" (
+    try_email IN VARCHAR2,
+    try_password IN VARCHAR2)
+RETURN NUMBER
+AS
+    id NUMBER;
+BEGIN
+    SELECT MAX(USERID) INTO id FROM USERS WHERE EMAIL = try_email AND PASSWORD = try_password;
+    RETURN id;
+END login;
+
+/
+--------------------------------------------------------
+--  DDL for Function NEWPIC
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE FUNCTION "NEWPIC" (
+    c_name IN VARCHAR2,
+    co_name IN VARCHAR2,
+    s_name IN VARCHAR2)
+RETURN NUMBER
+AS
+   c_db NUMBER := 0;
+   co_db NUMBER := 0;
+   s_db NUMBER := 0;
+   c_new NUMBER :=0;
+   co_new NUMBER := 0;
+   s_new NUMBER := 0;
+   l_id NUMBER := 0;
+BEGIN
+  SELECT COUNT(*) INTO c_db FROM COUNTRY WHERE NAME = c_name;
+  IF c_db = 0 THEN
+    INSERT INTO COUNTRY (NAME) VALUES (c_name);
+  END IF;
+  SELECT MAX(ID) INTO c_new FROM COUNTRY WHERE NAME = c_name;
+
+  SELECT COUNT(*) INTO co_db FROM COUNTY WHERE NAME = co_name;
+  IF co_db = 0 THEN
+    INSERT INTO COUNTY (COUNTRYID, NAME) VALUES (c_new, co_name);
+  END IF;
+  SELECT MAX(ID) INTO co_new FROM COUNTY WHERE NAME = co_name;
+
+
+  SELECT COUNT(*) INTO s_db FROM SETTLEMENT WHERE NAME = s_name;
+  IF s_db = 0 THEN
+    INSERT INTO SETTLEMENT (COUNTYID, NAME) VALUES (co_new, s_name);
+  END IF;
+  SELECT MAX(ID) INTO s_new FROM SETTLEMENT WHERE NAME = s_name;
+
+  IF s_db = 0 OR co_db = 0 OR c_db = 0 THEN
+    INSERT INTO LOCATIONS (COUNTRYID, COUNTYID, SETTLEMENTID) VALUES (c_new, co_new, s_new);
+  END IF;
+  SELECT MAX(LOCATIONID) INTO l_id FROM LOCATIONS WHERE COUNTRYID = c_new AND COUNTYID = co_new AND SETTLEMENTID = s_new;
+  RETURN l_id;
+END NewPic;
+
+/
+--------------------------------------------------------
+--  DDL for Function NEWRATING
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE FUNCTION "NEWRATING" (
+    p_id IN number,
+    u_id IN number,
+    rat IN number)
+RETURN BOOLEAN
+AS
+   v_rat NUMBER := 0;
+BEGIN
+  SELECT COUNT(*) INTO v_rat FROM RATING WHERE USERID = u_id AND PICTUREID = p_id;
+  IF v_rat = 0 THEN
+    INSERT INTO RATING VALUES (p_id, u_id, rat);
+    RETURN TRUE;
+  END IF;
+  UPDATE RATING SET STAR = rat WHERE USERID = u_id AND PICTUREID = p_id;
+  RETURN FALSE;
+END NewRating;
+
+/
+--------------------------------------------------------
+--  Constraints for Table LOCATIONS
+--------------------------------------------------------
+
+  ALTER TABLE "LOCATIONS" ADD PRIMARY KEY ("LOCATIONID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table COMMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "COMMENTS" ADD PRIMARY KEY ("COMMENTID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table UPLOAD
+--------------------------------------------------------
+
+  ALTER TABLE "UPLOAD" MODIFY ("MIT" NOT NULL ENABLE);
+  ALTER TABLE "UPLOAD" MODIFY ("DATUM" NOT NULL ENABLE);
+  ALTER TABLE "UPLOAD" MODIFY ("USERID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table COUNTRY
+--------------------------------------------------------
+
+  ALTER TABLE "COUNTRY" ADD UNIQUE ("NAME")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "COUNTRY" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "COUNTRY" MODIFY ("NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SETTLEMENT
+--------------------------------------------------------
+
+  ALTER TABLE "SETTLEMENT" ADD UNIQUE ("NAME")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "SETTLEMENT" MODIFY ("NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TAGS
+--------------------------------------------------------
+
+  ALTER TABLE "TAGS" ADD UNIQUE ("TAG")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "TAGS" ADD PRIMARY KEY ("TAGID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PICTURES
+--------------------------------------------------------
+
+  ALTER TABLE "PICTURES" ADD PRIMARY KEY ("PICTUREID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table COMPETITION
+--------------------------------------------------------
+
+  ALTER TABLE "COMPETITION" ADD PRIMARY KEY ("COMPETITIONID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table COUNTY
+--------------------------------------------------------
+
+  ALTER TABLE "COUNTY" ADD UNIQUE ("NAME")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "COUNTY" ADD PRIMARY KEY ("COUNTRYID", "ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "COUNTY" MODIFY ("NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table USERS
+--------------------------------------------------------
+
+  ALTER TABLE "USERS" ADD UNIQUE ("EMAIL")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "USERS" ADD PRIMARY KEY ("USERID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "USERS" MODIFY ("ROLE" NOT NULL ENABLE);
+  ALTER TABLE "USERS" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "USERS" MODIFY ("PASSWORD" NOT NULL ENABLE);
+  ALTER TABLE "USERS" MODIFY ("USERNAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table COMMENTS
+--------------------------------------------------------
+
+  ALTER TABLE "COMMENTS" ADD FOREIGN KEY ("PICTUREID")
+	  REFERENCES "PICTURES" ("PICTUREID") ON DELETE CASCADE ENABLE;
+  ALTER TABLE "COMMENTS" ADD FOREIGN KEY ("USERID")
+	  REFERENCES "USERS" ("USERID") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table COUNTY
+--------------------------------------------------------
+
+  ALTER TABLE "COUNTY" ADD FOREIGN KEY ("COUNTRYID")
+	  REFERENCES "COUNTRY" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PICTURES
+--------------------------------------------------------
+
+  ALTER TABLE "PICTURES" ADD FOREIGN KEY ("USERID")
+	  REFERENCES "USERS" ("USERID") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table RATING
+--------------------------------------------------------
+
+  ALTER TABLE "RATING" ADD FOREIGN KEY ("PICTUREID")
+	  REFERENCES "PICTURES" ("PICTUREID") ON DELETE CASCADE ENABLE;
+  ALTER TABLE "RATING" ADD FOREIGN KEY ("USERID")
+	  REFERENCES "USERS" ("USERID") ON DELETE CASCADE ENABLE;

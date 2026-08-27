@@ -1,0 +1,247 @@
+//Kiválassza a képhez tartozó commenteket
+    SELECT * FROM COMMENTS WHERE pictureid = ?;
+
+//Kiválassza location alapján a country county és settlement neveket. 
+    SELECT locations.locationid, country.name AS country_name, county.name AS county_name, settlement.name AS settlement_name
+    from locations
+    inner join settlement on settlement.id = locations.settlementid
+    inner join county on county.id = locations.countyid
+    inner join country on country.id = locations.countryid
+    ORDER BY locations.locationid WHERE locations.locationid = ?;
+
+//Kiválassza a már 1x legalább megjelölt országokat
+    SELECT * FROM COUNTRY 
+    WHERE id IN (SELECT countryid FROM locations);
+
+//Kiválassza a már 1x legalább megjelölt megyéket
+    SELECT * FROM COUNTY 
+    WHERE id IN (SELECT countyid FROM locations);
+
+//Kiválassza a már 1x legalább megjelölt városokat
+    SELECT * FROM SETTLEMENT 
+    WHERE id IN (SELECT settlementid FROM locations);
+
+//Megyék, városok szűrése ország alapján
+    SELECT county.name AS county_name, settlement.name as settlement_name
+    FROM SETTLEMENT
+    inner join county on settlement.countyid = county.id
+    WHERE county.countryid = ?;
+
+
+
+
+
+
+//Kép lekérése ID alapján
+    SELECT * FROM Pictures WHERE PictureID = ?;
+
+//Kép lekérés felhasználó alapján
+    SELECT * FROM Pictures WHERE User_ID = ?;
+
+//Első N kép lekérése értékelés alapján
+    SELECT  Picture.User_ID, 
+            Picture.Tags, 
+            Picture.PicturePath, 
+            Picture.Location, 
+            Country.Name AS country_name,
+            County.name AS county_name,
+            Settlement.name as settlement_name,
+            AVG(Rating.Star) AS rating_star
+    FROM Pictures
+    INNER JOIN Rating ON Pictures.PictureID = Rating.PictureID
+    INNER JOIN Location ON Picture.Location = Location.locationid
+    INNER JOIN Settlement ON Location.SettlementID = Settlement.ID
+    INNER JOIN County ON Location.CountyID = County.ID
+    INNER JOIN Country ON Location.CountryID = Country.ID
+    GROUP BY Picture.PictureID
+    ORDER BY AVG(Rating.Star)
+    LIMIT ?;
+
+
+
+1. Felhasználók kezelése
+
+//Bejelentkezés teszt (Ha a lekérdezés hossza nem 0, akkor helyes adatok)
+    SELECT userid from users WHERE users.email = ? AND users.password = ?;
+
+//Foglalt email, felhasználónév tesztelése
+    SELECT userid from users WHERE users.email = ?;
+    SELECT userid from users WHERE users.username = ?;
+
+//Felhasználó feltöltése
+    INSERT INTO users (users.email, users.username, users.password, users.role) VALUES (?,?,?,?);
+
+//Felhasználó adatainak lekérése id alapján
+    SELECT username, email, role FROM users WHERE userid = ?;
+
+2. Képek feltöltése
+
+//Location lekérése (Ha már van akkor nem csinálunk újat)
+    SELECT * FROM Locations WHERE CountryID = ?, CountyID = ?, SettlementID = ?;
+
+//Kép feltöltése
+    INSERT INTO Pictures (User_ID, Tags, PicturePath, Location) VALUES (?,?,?,?);
+
+
+
+3. Kategóriák
+
+//Kategória hozzáadása
+    INSERT INTO Tags (Tag) VALUES (?);
+
+//Kategória törlése
+    DELETE FROM Tags WHERE Tags.TagID = ?;
+
+
+
+4. Adott kategóriában hány kép van?
+
+    SELECT Count(*) FROM Pictures WHERE Picture.Tag LIKE '%?%';
+
+
+
+5. Legtöbb képpel rendelkező felhasználók
+
+    SELECT UserID, Username, COUNT(Pictures.PictureID) FROM users
+    INNER JOIN Pictures ON Pictures.User_ID = Users.UserID
+    GROUP BY Users.UserID
+    ORDER BY COUNT(Pictures.PictureID)
+    LIMIT ?;
+
+
+
+6. Képek értékelése
+
+//Kép pontozás
+    INSERT INTO Rating (PictureID, UserID, Star) VALUES (?,?,?);
+
+//Kommentezés kép alá
+    INSERT INTO Comments (PictureID, UserID, RepliedToID, Comm) VALUES (?,?,?,?);
+
+
+
+7. A kategóriák legjobb képei
+
+//Kategória szerinti első N kép lekérése értékelés alapján
+    SELECT  Picture.User_ID, 
+            Picture.Tags, 
+            Picture.PicturePath, 
+            Picture.Location, 
+            Country.Name AS country_name,
+            County.name AS county_name,
+            Settlement.name as settlement_name,
+            AVG(Rating.Star) AS rating_star
+    FROM Pictures
+    INNER JOIN Rating ON Pictures.PictureID = Rating.PictureID
+    INNER JOIN Location ON Picture.Location = Location.locationid
+    INNER JOIN Settlement ON Location.SettlementID = Settlement.ID
+    INNER JOIN County ON Location.CountyID = County.ID
+    INNER JOIN Country ON Location.CountryID = Country.ID
+    WHERE Picture.Tags LIKE '%?%'
+    GROUP BY Picture.PictureID
+    ORDER BY AVG(Rating.Star)
+    LIMIT ?;
+
+
+
+8. Országok, megyék, városok felvitele
+
+//Location feltöltése
+    INSERT INTO Locations (CountryID, CountyID, SettlementID) VALUES (?,?,?);
+
+
+
+9. Képhez megjelölni, hogy hol készült
+
+    //Kép feltöltésénél van.
+
+
+
+10. Felhasználóknál a település megjelölése
+
+//L8R
+
+
+
+11. Településenként hány fénykép készült
+
+    SELECT Settlement.Name AS settlement_name, Count(Pictures.PictureID)
+    FROM Settlement
+    INNER JOIN Rating ON Pictures.PictureID = Rating.PictureID
+    INNER JOIN Location ON Picture.Location = Location.locationid
+    INNER JOIN Settlement ON Location.SettlementID = Settlement.ID
+    INNER JOIN County ON Location.CountyID = County.ID
+    INNER JOIN Country ON Location.CountryID = Country.ID
+    GROUP BY Settlement.ID
+    ORDER BY Count(Pictures.PictureID);
+    
+
+
+12. Városok „arcai” a feltöltött képek alapján
+
+//Város szerinti első N kép lekérése értékelés alapján
+    SELECT  Picture.User_ID, 
+            Picture.Tags, 
+            Picture.PicturePath, 
+            Picture.Location, 
+            Country.Name AS country_name,
+            County.name AS county_name,
+            Settlement.name as settlement_name,
+            AVG(Rating.Star) AS rating_star
+    FROM Pictures
+    INNER JOIN Rating ON Pictures.PictureID = Rating.PictureID
+    INNER JOIN Location ON Picture.Location = Location.locationid
+    INNER JOIN Settlement ON Location.SettlementID = Settlement.ID
+    INNER JOIN County ON Location.CountyID = County.ID
+    INNER JOIN Country ON Location.CountryID = Country.ID
+    WHERE Settlement.ID = ?
+    GROUP BY Picture.PictureID
+    ORDER BY AVG(Rating.Star)
+    LIMIT ?;
+
+
+
+13. Legnépszerűbb úti célok (azokból a képekből, amelyet azok a felhasználók töltöttek fel, akik
+nem ott laknak)
+
+//L8R
+
+
+
+14. Feltöltési statisztikák
+
+//L8R
+
+
+
+15. Fórumok, megjegyzések fényképekhez, válaszolási lehetőséggel
+
+//Értékelésnél comment
+
+
+
+16. Felhasználói értékelés, pontozás a feltöltött képekre kapott pontszámok, és az adott
+pontszámok, hozzászólások alapján
+
+//Értékelésnél van
+
+
+
+17. Fotópályázatok kiírása, szavazás, nyertes kihirdetése, ...
+
+//L8R
+
+
+
+18. Új képek ajánlása az alapján, hogy a felhasználó milyen jellegű képeket nézett meg
+korábban
+
+L8R
+
+
+
+19. Felhasználó átlagos rating
+
+L8R
+
+
